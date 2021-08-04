@@ -15,7 +15,7 @@ Deno.test({
       "tests/fixtures/extension/manifest.json",
       "tests/fixtures/extension/assets/dummy.txt",
     ];
-    assertEquals(output, expected);
+    assertEquals(output.sort(), expected.sort());
   },
 });
 
@@ -32,7 +32,7 @@ Deno.test({
       "tests/fixtures/extension/manifest.json",
       "tests/fixtures/extension/assets/dummy.txt",
     ].map((p) => path.join(`${Deno.cwd()}`, p));
-    assertEquals(output, expected);
+    assertEquals(output.sort(), expected.sort());
   },
 });
 
