@@ -1,0 +1,82 @@
+# Velociraptor script – @see https://velociraptor.run/docs/introduction/
+scripts:
+  warmup:
+    desc: Warm up Deno cache
+    cmd: deno cache deps.ts dev_deps.ts
+    reload: false
+    lock: lock.json
+  lint:
+    desc: Lint all code
+    cmd: deno lint
+  format:
+    desc: Format check all code
+    cmd: deno fmt --check --ignore="lock.json,cov_profile/"
+  format:fix:
+    desc: Format & fix all code
+    cmd: deno fmt --ignore="lock.json,cov_profile/"
+  test:
+    desc: Run all tests
+    cmd: deno test
+    reload: false
+    cachedOnly: true
+    lock: lock.json
+    allow:
+      - env
+      - read
+      - write
+  coverage:
+    - desc: Run tests and generate coverage data
+      cmd: deno test --shuffle --coverage=cov_profile
+      reload: false
+      cachedOnly: true
+      lock: lock.json
+      allow:
+        - env
+        - read
+        - write
+    - desc: Generate lcov data for coverage
+      cmd: deno coverage cov_profile --exclude="test/**" --lcov > cov_profile.lcov
+  compile:
+    desc: Compile binary for all platforms
+    pll:
+      - deno compile --output cwc-linux --target x86_64-unknown-linux-gnu cli.ts
+      - deno compile --output cwc-apple-intel --target x86_64-apple-darwin cli.ts
+      - deno compile --output cwc-apple-arm --target aarch64-apple-darwin cli.ts
+      - deno compile --output cwc-windows --target x86_64-pc-windows-msvc cli.ts
+    reload: false
+    cachedOnly: true
+    lock: lock.json
+    allow:
+      - env
+      - read
+      - write
+      - net: www.googleapis.com
+
+  # Git hooks
+  pre-commit:
+    desc: Pre-commit hook that makes sure the code is linted and formatted
+    pll:
+      - vr lint
+      - vr format
+    gitHook: pre-commit
+
+  # Utility scripts
+  install:
+    desc: Install all dependencies
+    cmd: deno cache deps.ts dev_deps.ts
+    reload: true
+    lock: lock.json
+  reload:
+    desc: Reload dependency cache and update lock file
+    cmd: deno cache --lock-write deps.ts dev_deps.ts
+    reload: true
+    lock: lock.json
+  update:
+    - desc: Update all dependencies
+      cmd: deno run https://deno.land/x/udd@0.5.0/main.ts dev_deps.ts deps.ts
+      allow:
+          - read
+          - write
+          - net
+    - desc: Reload dependency cache and update lock file
+      cmd: vr reload

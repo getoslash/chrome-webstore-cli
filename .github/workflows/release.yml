@@ -1,0 +1,84 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - '!*' # Do not execute on tags
+  pull_request:
+    paths:
+      - '!*.MD'
+
+jobs:
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup Deno
+      uses: denoland/setup-deno@v1
+      with:
+        deno-version: v1.x
+    - name: Setup Velociraptor
+      uses: jurassiscripts/setup-velociraptor@v1
+    - name: Check code formatting
+      run: vr format
+    - name: Lint code
+      run: vr lint
+
+  test:
+    name: test
+    strategy:
+      matrix:
+        platform: [ ubuntu-latest, macOS-latest, windows-latest ]
+    name: test/${{ matrix.platform }}
+    runs-on: ${{ matrix.platform }}
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup Deno
+      uses: denoland/setup-deno@v1
+      with:
+        deno-version: v1.x
+    - name: Setup Velociraptor
+      uses: jurassiscripts/setup-velociraptor@v1
+    - name: Generate random 1-byte signed decimal integer for seed
+      id: generate-seed
+      run: echo "::set-output name=seed::$(od -vAn -N1 -tu2 < /dev/urandom | xargs)"
+    - name: Warm up the Deno dependency cache
+      run: vr warmup
+    - name: Run all tests in random order
+      run: vr test --shuffle=${{ steps.generate-seed.outputs.seed }}
+
+  coverage:
+    needs: [ test ]
+    name: coverage
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup Deno
+      uses: denoland/setup-deno@v1
+      with:
+        deno-version: v1.x
+    - name: Setup Velociraptor
+      uses: jurassiscripts/setup-velociraptor@v1
+    - name: Generate random 1-byte signed decimal integer for seed
+      id: generate-seed
+      run: echo "::set-output name=seed::$(od -vAn -N1 -tu2 < /dev/urandom | xargs)"
+    - name: Warm up the Deno dependency cache
+      run: vr warmup
+    - name: Run all tests in random order
+      run: vr test --shuffle=${{ steps.generate-seed.outputs.seed }}
+    - name: Generate coverage data
+      run: vr coverage
+    - name: Upload coverage report to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: cov_profile.lcov
+        flags: unittests
+        fail_ci_if_error: true
+        verbose: false

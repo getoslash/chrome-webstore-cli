@@ -1,0 +1,40 @@
+name: Package
+on: [ release ]
+
+jobs:
+  build_binary:
+    name: build-binary
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup Deno
+      uses: denoland/setup-deno@v1
+      with:
+        deno-version: v1.x
+    - name: Setup Velociraptor
+      uses: jurassiscripts/setup-velociraptor@v1
+    - name: Warm up the Deno dependency cache
+      run: vr warmup
+    - name: Compile binaries
+      run: |
+        vr compile
+        chmod ugo+x cwc-*
+    - name: Upload Linux binaries to release
+      uses: JasonEtco/upload-to-release@master
+      with:
+        args: 'cwc-linux application/x-executable'
+    - name: Upload macOS Intel binaries to release
+      uses: JasonEtco/upload-to-release@master
+      with:
+        args: 'cwc-apple-intel application/x-mach-binary'
+    - name: Upload macOS ARM binaries to release
+      uses: JasonEtco/upload-to-release@master
+      with:
+        args: 'cwc-apple-arm application/x-mach-binary'
+    - name: Upload Windows binaries to release
+      uses: JasonEtco/upload-to-release@master
+      with:
+        args: 'cwc-windows.exe application/vnd.microsoft.portable-executable'
