@@ -68,13 +68,13 @@ jobs:
       run: npm install make-random
     - name: Generate random number for seeding test shuffle
       uses: actions/github-script@v4
-        id: generate-seed
-        with:
-          script: |
-            const { randomInRange } = require('make-random')
-            const result = await randomInRange(1, 2048)
-            return result
-          result-encoding: string
+      id: generate-seed
+      with:
+        script: |
+          const { randomInRange } = require('make-random')
+          const result = await randomInRange(1, 2048)
+          return result
+        result-encoding: string
     - name: Warm up the Deno dependency cache
       run: vr warmup
     - name: Run all tests in random order
