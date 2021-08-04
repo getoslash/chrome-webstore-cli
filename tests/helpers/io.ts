@@ -26,8 +26,6 @@ export const calculateFileSize = async (
 export const isFile = async (
   filePath: string,
 ): Promise<boolean> => {
-  const file = await Deno.open(filePath, { read: true });
-  const fileInfo = await Deno.fstat(file.rid);
-  Deno.close(file.rid);
+  const fileInfo = await Deno.stat(filePath);
   return fileInfo.isFile;
 };
