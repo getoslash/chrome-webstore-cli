@@ -1,5 +1,6 @@
 import { calculateFileSize } from "./helpers/io.ts";
-import { path } from "../deps.ts";
+import { normaliseFilePath } from "./helpers/path.ts";
+import { path } from "../dev_deps.ts";
 import { assertEquals } from "../dev_deps.ts";
 import { getFilepaths, zipDirectory } from "../utils/zip.ts";
 import { default as temporaryDirectory } from "../utils/temp-directory.ts";
@@ -15,7 +16,10 @@ Deno.test({
       "tests/fixtures/extension/manifest.json",
       "tests/fixtures/extension/assets/dummy.txt",
     ];
-    assertEquals(output.sort(), expected.sort());
+    assertEquals(
+      output.map(normaliseFilePath).sort(),
+      expected.map(normaliseFilePath).sort(),
+    );
   },
 });
 
@@ -32,7 +36,10 @@ Deno.test({
       "tests/fixtures/extension/manifest.json",
       "tests/fixtures/extension/assets/dummy.txt",
     ].map((p) => path.join(`${Deno.cwd()}`, p));
-    assertEquals(output.sort(), expected.sort());
+    assertEquals(
+      output.map(normaliseFilePath).sort(),
+      expected.map(normaliseFilePath).sort(),
+    );
   },
 });
 

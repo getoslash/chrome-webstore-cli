@@ -1,5 +1,5 @@
 import { isFile } from "./helpers/io.ts";
-import { path } from "../deps.ts";
+import { path } from "../dev_deps.ts";
 import { assertEquals } from "../dev_deps.ts";
 import { prepareFilesOrDirectoryForUpload } from "../helpers/uploadable.ts";
 import { default as temporaryDirectory } from "../utils/temp-directory.ts";
