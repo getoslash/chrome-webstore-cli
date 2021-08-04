@@ -16,7 +16,7 @@ scripts:
     cmd: deno fmt --ignore="lock.json,cov_profile/"
   test:
     desc: Run all tests
-    cmd: deno test --fail-fast
+    cmd: deno test
     reload: false
     cachedOnly: true
     lock: lock.json
