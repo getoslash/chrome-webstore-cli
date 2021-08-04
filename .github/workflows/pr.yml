@@ -46,18 +46,21 @@ jobs:
         deno-version: v1.x
     - name: Setup Velociraptor
       uses: jurassiscripts/setup-velociraptor@v1
-    - name: Generate random 1-byte signed decimal integer for seed
-      if: runner.os == 'macOS' || runner.os == 'Linux'
-      id: generate-seed
-      run: echo "::set-output name=seed::$(od -vAn -N1 -tu2 < /dev/urandom | xargs)"
-    - name: Generate random signed decimal integer for seed
-      if: runner.os == 'Windows'
-      id: generate-seed
-      run: echo "::set-output name=seed::%RANDOM%"
+    - name: Install random number generator
+      run: npm install make-random
+    - name: Generate random number for seeding test shuffle
+      uses: actions/github-script@v4
+        id: generate-seed
+        with:
+          script: |
+            const { randomInRange } = require('make-random')
+            const result = await randomInRange(1, 2048)
+            return result
+          result-encoding: string
     - name: Warm up the Deno dependency cache
       run: vr warmup
     - name: Run all tests in random order
-      run: vr test --shuffle=${{ steps.generate-seed.outputs.seed }}
+      run: vr test --shuffle=${{ steps.generate-seed.outputs.result }}
 
   coverage:
     needs: [ test ]
