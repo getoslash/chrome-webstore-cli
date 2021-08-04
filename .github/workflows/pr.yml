@@ -57,6 +57,8 @@ jobs:
           const result = await randomInRange(1, 2048)
           return result
         result-encoding: string
+    - name: Clean up random number generator
+      run: rm -rf node_modules/
     - name: Warm up the Deno dependency cache
       run: vr warmup
     - name: Run all tests in random order
@@ -86,6 +88,8 @@ jobs:
           const result = await randomInRange(1, 2048)
           return result
         result-encoding: string
+    - name: Clean up random number generator
+      run: rm -rf node_modules/
     - name: Warm up the Deno dependency cache
       run: vr warmup
     - name: Run all tests in random order
