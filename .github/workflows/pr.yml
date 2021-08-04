@@ -47,11 +47,11 @@ jobs:
     - name: Setup Velociraptor
       uses: jurassiscripts/setup-velociraptor@v1
     - name: Generate random 1-byte signed decimal integer for seed
-      if: ${{ matrix.platform == 'macOS-latest' || matrix.platform == 'ubuntu-latest' }}
+      if: runner.os == 'macOS' || runner.os == 'Linux'
       id: generate-seed
       run: echo "::set-output name=seed::$(od -vAn -N1 -tu2 < /dev/urandom | xargs)"
     - name: Generate random signed decimal integer for seed
-      if: ${{ matrix.platform == 'windows-latest' }}
+      if: runner.os == 'Windows'
       id: generate-seed
       run: echo "::set-output name=seed::%RANDOM%"
     - name: Warm up the Deno dependency cache
