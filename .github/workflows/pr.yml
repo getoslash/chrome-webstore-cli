@@ -58,7 +58,9 @@ jobs:
           return result
         result-encoding: string
     - name: Clean up random number generator
-      run: npx --yes rimraf node_modules/
+      run: |
+        npm uninstall make-random
+        npx --yes rimraf package.json package-lock.json node_modules/
     - name: Warm up the Deno dependency cache
       run: vr warmup
     - name: Run all tests in random order
@@ -89,7 +91,9 @@ jobs:
           return result
         result-encoding: string
     - name: Clean up random number generator
-      run: npx --yes rimraf node_modules/
+      run: |
+        npm uninstall make-random
+        npx --yes rimraf package.json package-lock.json node_modules/
     - name: Warm up the Deno dependency cache
       run: vr warmup
     - name: Run all tests in random order
