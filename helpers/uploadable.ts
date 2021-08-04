@@ -15,9 +15,7 @@ export const prepareFilesOrDirectoryForUpload = async (
   cleanupRequired: boolean;
 }> => {
   const debug = debugLog("cwc:helpers:uploadable");
-  const file = await Deno.open(filePath, { read: true });
-  const fileInfo = await Deno.fstat(file.rid);
-  Deno.close(file.rid);
+  const fileInfo = await Deno.stat(filePath);
   debug("fetched input source info %j", fileInfo);
   if (fileInfo.isFile) {
     return {
