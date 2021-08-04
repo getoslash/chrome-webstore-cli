@@ -29,7 +29,6 @@ jobs:
       run: vr lint
 
   test:
-    name: test
     strategy:
       matrix:
         platform: [ ubuntu-latest, macOS-latest, windows-latest ]
