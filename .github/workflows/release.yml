@@ -52,12 +52,11 @@ jobs:
         script: |
           const { randomInRange } = require('make-random')
           const result = await randomInRange(1, 2048)
+          await io.rmRF('node_modules')
+          await io.rmRF('package.json')
+          await io.rmRF('package-lock.json')
           return result
         result-encoding: string
-    - name: Clean up random number generator
-      run: |
-        npm uninstall make-random
-        npx --yes rimraf package.json package-lock.json node_modules/
     - name: Warm up the Deno dependency cache
       run: vr warmup
     - name: Run all tests in random order
@@ -85,12 +84,11 @@ jobs:
         script: |
           const { randomInRange } = require('make-random')
           const result = await randomInRange(1, 2048)
+          await io.rmRF('node_modules')
+          await io.rmRF('package.json')
+          await io.rmRF('package-lock.json')
           return result
         result-encoding: string
-    - name: Clean up random number generator
-      run: |
-        npm uninstall make-random
-        npx --yes rimraf package.json package-lock.json node_modules/
     - name: Warm up the Deno dependency cache
       run: vr warmup
     - name: Run all tests in random order
