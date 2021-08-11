@@ -91,8 +91,6 @@ jobs:
         result-encoding: string
     - name: Warm up the Deno dependency cache
       run: vr warmup
-    - name: Run all tests in random order
-      run: vr test --shuffle=${{ steps.generate-seed.outputs.result }}
     - name: Generate coverage data
       run: vr coverage
     - name: Upload coverage report to Codecov
