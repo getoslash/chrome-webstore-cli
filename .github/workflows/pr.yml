@@ -31,11 +31,10 @@ jobs:
         pr_only: true
 
   test:
-    name: test
+    name: test/${{ matrix.platform }}
     strategy:
       matrix:
         platform: [ ubuntu-latest, macOS-latest, windows-latest ]
-    name: test/${{ matrix.platform }}
     runs-on: ${{ matrix.platform }}
     steps:
     - name: Checkout code
