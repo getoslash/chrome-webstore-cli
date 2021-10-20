@@ -1,4 +1,4 @@
-import { createHash, iter } from "../../dev_deps.ts";
+import { createHash } from "../../dev_deps.ts";
 import type { SupportedAlgorithm } from "../../dev_deps.ts";
 
 export const calculateFileHash = async (
@@ -7,7 +7,7 @@ export const calculateFileHash = async (
 ): Promise<string> => {
   const hash = createHash(hashMethod);
   const file = await Deno.open(filePath);
-  for await (const chunk of iter(file)) {
+  for await (const chunk of Deno.iter(file)) {
     hash.update(chunk);
   }
   Deno.close(file.rid);
