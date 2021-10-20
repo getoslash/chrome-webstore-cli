@@ -35,7 +35,7 @@ scripts:
         - read
         - write
     - desc: Generate lcov data for coverage
-      cmd: deno coverage cov_profile --exclude="test/**" --lcov > cov_profile.lcov
+      cmd: deno coverage cov_profile --exclude="deps.ts" --exclude="dev_deps.ts" --exclude="test/**" --lcov > cov_profile.lcov
   compile:
     desc: Compile binary for all platforms
     pll:
