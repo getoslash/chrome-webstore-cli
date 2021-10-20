@@ -39,10 +39,10 @@ scripts:
   compile:
     desc: Compile binary for all platforms
     pll:
-      - deno compile --output cwc-linux --target x86_64-unknown-linux-gnu cli.ts
-      - deno compile --output cwc-apple-intel --target x86_64-apple-darwin cli.ts
-      - deno compile --output cwc-apple-arm --target aarch64-apple-darwin cli.ts
-      - deno compile --output cwc-windows --target x86_64-pc-windows-msvc cli.ts
+      - deno compile --output dist/cwc-linux --target x86_64-unknown-linux-gnu cli.ts
+      - deno compile --output dist/cwc-apple-intel --target x86_64-apple-darwin cli.ts
+      - deno compile --output dist/cwc-apple-arm --target aarch64-apple-darwin cli.ts
+      - deno compile --output dist/cwc-windows --target x86_64-pc-windows-msvc cli.ts
     reload: false
     cachedOnly: true
     lock: lock.json
