@@ -1,3 +1,5 @@
 .DS_Store
 cov_profile/
 *.lcov
+dist/**/*
+!dist/.gitkeep

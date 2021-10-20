@@ -25,11 +25,11 @@ jobs:
     - name: Upload Linux binaries to release
       uses: JasonEtco/upload-to-release@master
       with:
-        args: 'cwc-linux application/x-executable'
+        args: 'dist/cwc-linux application/x-executable'
     - name: Upload macOS Intel binaries to release
       uses: JasonEtco/upload-to-release@master
       with:
-        args: 'cwc-apple-intel application/x-mach-binary'
+        args: 'dist/cwc-apple-intel application/x-mach-binary'
     - name: Upload macOS ARM binaries to release
       uses: JasonEtco/upload-to-release@master
       with:
@@ -37,4 +37,4 @@ jobs:
     - name: Upload Windows binaries to release
       uses: JasonEtco/upload-to-release@master
       with:
-        args: 'cwc-windows.exe application/vnd.microsoft.portable-executable'
+        args: 'dist/cwc-windows.exe application/vnd.microsoft.portable-executable'
