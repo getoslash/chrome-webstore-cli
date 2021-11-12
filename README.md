@@ -23,14 +23,14 @@ If you use Deno, you can also directly compile from source and install `cwc`
 using the command —
 
 ```
-deno install --quiet --allow-read --allow-write --allow-net=www.googleapis.com --allow-env --name cwc https://deno.land/x/cwc@1.0.0/mod.ts
+deno install --quiet --allow-read --allow-write --allow-net=www.googleapis.com --allow-env --name cwc https://deno.land/x/cwc@1.1.0/mod.ts
 ```
 
 ## Usage
 
 ```
   Usage:   cwc
-  Version: 1.0.0
+  Version: 1.1.0
 
   Description:
 
