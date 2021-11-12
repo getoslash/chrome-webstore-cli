@@ -104,9 +104,7 @@ export const publish = async (
 
   debug(
     `publishing to chrome store${
-      options.trustedTesters
-        ? " for only trusted testers"
-        : ""
+      options.trustedTesters ? " for only trusted testers" : ""
     }`,
   );
   const result = await api.publish(
