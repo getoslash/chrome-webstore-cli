@@ -1,7 +1,7 @@
 <!-- deno-fmt-ignore-file -->
 # Chrome Web Store CLI
 
-[![deno version](https://img.shields.io/badge/deno-^1.15.2-lightgrey?logo=deno)](https://github.com/denoland/deno)
+[![deno version](https://img.shields.io/badge/deno-^1.16.1-lightgrey?logo=deno)](https://github.com/denoland/deno)
 [![GitHub Release](https://img.shields.io/github/release/getoslash/chrome-webstore-cli.svg)](https://github.com/getoslash/chrome-webstore-cli/releases)
 [![Release](https://github.com/getoslash/chrome-webstore-cli/actions/workflows/release.yml/badge.svg)](https://github.com/getoslash/chrome-webstore-cli/actions/workflows/release.yml)
 [![codecov](https://codecov.io/gh/getoslash/chrome-webstore-cli/branch/main/graph/badge.svg?token=???)](https://codecov.io/gh/getoslash/chrome-webstore-cli)
@@ -29,25 +29,26 @@ deno install --quiet --allow-read --allow-write --allow-net=www.googleapis.com -
 ## Usage
 
 ```
-cwc
+  Usage:   cwc
+  Version: 1.0.0
 
-Usage:
-  $ cwc <command> [options]
+  Description:
 
-Commands:
-  upload <source>  Upload directory or ZIP file to Chrome Web Store
-  publish          Publish last upload to Chrome Web Store
+    Upload & publish extensions and themes to the Chrome Web Store
 
-For more info, run any command with the `--help` flag:
-  $ cwc upload --help
-  $ cwc publish --help
+  Options:
 
-Options:
-  --extension-id <id>              ID of the extension on the Chrome Web Store
-  --client-id <client-id>          Google API OAuth2 client ID
-  --client-secret <client-secret>  Google API OAuth2 client secret
-  --refresh-token <refresh-token>  Google API OAuth2 refresh token
-  -h, --help                       Display this message
+    -h, --help                            - Show this help.
+    -V, --version                         - Show the version number for this program.
+    -i, --id             <id>             - ID of the extension or theme on the Chrome Web Store  (required)
+    -c, --client-id      <client-id>      - Google API OAuth2 client ID                           (required)
+    -s, --client-secret  <client-secret>  - Google API OAuth2 client secret                       (required)
+    -r, --refresh-token  <refresh-token>  - Google API OAuth2 refresh token                       (required)
+
+  Commands:
+
+    upload   - Upload directory or ZIP file to Chrome Web Store
+    publish  - Publish last upload to Chrome Web Store
 ```
 
 ### 🗜 Auto-Zip support
@@ -83,7 +84,7 @@ The app needs a few permissions –
    <summary>Upload and auto-publish your extension</summary>
 
    ```
-   cwc upload --source "<path-to-extension>" --extension-id "<extension-id>" --client-id "<client-id>" --client-secret "<client-secret>" --refresh-token "<refresh-token>" --auto-publish
+   cwc upload --file "<path-to-extension>" --id "<extension-id>" --client-id "<client-id>" --client-secret "<client-secret>" --refresh-token "<refresh-token>" --auto-publish
    ```
 
 </details>
@@ -93,7 +94,7 @@ The app needs a few permissions –
    <summary>Publish the last uploaded version of your extension</summary>
 
    ```
-   cwc publish --extension-id "<extension-id>" --client-id "<client-id>" --client-secret "<client-secret>" --refresh-token "<refresh-token>"
+   cwc publish --id "<extension-id>" --client-id "<client-id>" --client-secret "<client-secret>" --refresh-token "<refresh-token>"
    ```
 
 </details>
@@ -103,7 +104,7 @@ The app needs a few permissions –
    <summary>Publish the last uploaded version of your extension but only to trusted testers</summary>
 
    ```
-   cwc publish --extension-id "<extension-id>" --client-id "<client-id>" --client-secret "<client-secret>" --refresh-token "<refresh-token>" --trusted-testers
+   cwc publish --id "<extension-id>" --client-id "<client-id>" --client-secret "<client-secret>" --refresh-token "<refresh-token>" --trusted-testers
    ```
 
 </details>

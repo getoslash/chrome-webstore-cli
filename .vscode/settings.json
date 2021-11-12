@@ -4,8 +4,7 @@
   "deno.unstable": false,
   "deno.suggest.autoImports": true,
   "deno.suggest.imports.hosts": {
-    "https://deno.land/": true,
-    "https://unpkg.com/": true
+    "https://deno.land/": true
   },
   "editor.defaultFormatter": "denoland.vscode-deno",
   "[typescript]": {

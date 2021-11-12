@@ -1,12 +1,12 @@
-export * as path from "https://deno.land/std@0.112.0/path/mod.ts";
-export { readableStreamFromReader } from "https://deno.land/std@0.112.0/io/mod.ts";
-export { cac } from "https://unpkg.com/cac@6.7.11/mod.ts";
+export * as path from "https://deno.land/std@0.114.0/path/mod.ts";
+export { readableStreamFromReader } from "https://deno.land/std@0.114.0/io/mod.ts";
+export { Command } from "https://deno.land/x/cliffy@v0.20.1/command/command.ts";
 export { JSZip } from "https://deno.land/x/jszip@0.10.0/mod.ts";
 export { default as debugLog } from "https://deno.land/x/debuglog@v1.0.0/debug.ts";
-export { default as apiClient } from "https://deno.land/x/cwa@v1.0.0/mod.ts";
+export { default as apiClient } from "https://deno.land/x/cwa@v1.0.1/mod.ts";
 export type {
   GoogleAPIWebStoreItem,
   GoogleAPIWebStorePublishFailure,
   GoogleAPIWebStorePublishResponse,
   GoogleAPIWebStorePublishSuccess,
-} from "https://deno.land/x/cwa@v1.0.0/types.ts";
+} from "https://deno.land/x/cwa@v1.0.1/types.ts";
