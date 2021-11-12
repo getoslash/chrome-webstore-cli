@@ -102,7 +102,13 @@ export const publish = async (
     refreshToken: options.refreshToken,
   });
 
-  debug(`publishing to chrome store${options.trustedTesters ? ' for only trusted testers': ''}`);
+  debug(
+    `publishing to chrome store${
+      options.trustedTesters
+        ? " for only trusted testers"
+        : ""
+    }`,
+  );
   const result = await api.publish(
     options.trustedTesters ? "trustedUsers" : undefined,
   );
