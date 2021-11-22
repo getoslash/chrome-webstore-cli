@@ -1,7 +1,7 @@
 <!-- deno-fmt-ignore-file -->
 # Chrome Web Store CLI
 
-[![deno version](https://img.shields.io/badge/deno-^1.16.1-lightgrey?logo=deno)](https://github.com/denoland/deno)
+[![deno version](https://img.shields.io/badge/deno-^1.16.2-lightgrey?logo=deno)](https://github.com/denoland/deno)
 [![GitHub Release](https://img.shields.io/github/release/getoslash/chrome-webstore-cli.svg)](https://github.com/getoslash/chrome-webstore-cli/releases)
 [![Release](https://github.com/getoslash/chrome-webstore-cli/actions/workflows/release.yml/badge.svg)](https://github.com/getoslash/chrome-webstore-cli/actions/workflows/release.yml)
 [![codecov](https://codecov.io/gh/getoslash/chrome-webstore-cli/branch/main/graph/badge.svg?token=???)](https://codecov.io/gh/getoslash/chrome-webstore-cli)
