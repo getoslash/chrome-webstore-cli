@@ -1,4 +1,4 @@
-import { assertEquals, stub } from "../dev_deps.ts";
+import { assertEquals, resolvesNext, stub } from "../dev_deps.ts";
 import {
   isPublishError,
   isPublishSuccess,
@@ -24,34 +24,42 @@ Deno.test({
         source: "./tests/fixtures/extension.zip",
       },
     } as const;
-    const fetchStub: Stub<typeof globalThis> = stub(globalThis, "fetch", [
-      Promise.resolve(
-        new Response(
-          new Blob([
-            JSON.stringify(
-              {
-                "access_token": "xyz",
-              },
-              null,
-              2,
-            ),
-          ], { type: "application/json" }),
-        ),
+
+    const mockResponses = [
+      new Response(
+        new Blob([
+          JSON.stringify(
+            {
+              "access_token": "xyz",
+            },
+            null,
+            2,
+          ),
+        ], { type: "application/json" }),
       ),
-      Promise.resolve(
-        new Response(
-          new Blob([
-            JSON.stringify(
-              {
-                "UPLOAD_STATE": "SUCCESS",
-              },
-              null,
-              2,
-            ),
-          ], { type: "application/json" }),
-        ),
+      new Response(
+        new Blob([
+          JSON.stringify(
+            {
+              "UPLOAD_STATE": "SUCCESS",
+            },
+            null,
+            2,
+          ),
+        ], { type: "application/json" }),
       ),
-    ]);
+    ];
+
+    const responses = async function* () {
+      yield* mockResponses;
+    };
+
+    const fetchStub: Stub<typeof globalThis> = stub(
+      globalThis,
+      "fetch",
+      resolvesNext(responses()),
+    );
+
     const uploadResult = await upload(fixtures.uploadOptions);
 
     assertEquals(
@@ -103,34 +111,42 @@ Deno.test({
         source: "./tests/fixtures/extension",
       },
     } as const;
-    const fetchStub: Stub<typeof globalThis> = stub(globalThis, "fetch", [
-      Promise.resolve(
-        new Response(
-          new Blob([
-            JSON.stringify(
-              {
-                "access_token": "xyz",
-              },
-              null,
-              2,
-            ),
-          ], { type: "application/json" }),
-        ),
+
+    const mockResponses = [
+      new Response(
+        new Blob([
+          JSON.stringify(
+            {
+              "access_token": "xyz",
+            },
+            null,
+            2,
+          ),
+        ], { type: "application/json" }),
       ),
-      Promise.resolve(
-        new Response(
-          new Blob([
-            JSON.stringify(
-              {
-                "UPLOAD_STATE": "SUCCESS",
-              },
-              null,
-              2,
-            ),
-          ], { type: "application/json" }),
-        ),
+      new Response(
+        new Blob([
+          JSON.stringify(
+            {
+              "UPLOAD_STATE": "SUCCESS",
+            },
+            null,
+            2,
+          ),
+        ], { type: "application/json" }),
       ),
-    ]);
+    ];
+
+    const responses = async function* () {
+      yield* mockResponses;
+    };
+
+    const fetchStub: Stub<typeof globalThis> = stub(
+      globalThis,
+      "fetch",
+      resolvesNext(responses()),
+    );
+
     const uploadResult = await upload(fixtures.uploadOptions);
 
     assertEquals(
@@ -182,60 +198,64 @@ Deno.test({
         autoPublish: true,
       },
     } as const;
-    const fetchStub: Stub<typeof globalThis> = stub(globalThis, "fetch", [
-      Promise.resolve(
-        new Response(
-          new Blob([
-            JSON.stringify(
-              {
-                "access_token": "xyz",
-              },
-              null,
-              2,
-            ),
-          ], { type: "application/json" }),
-        ),
+
+    const mockResponses = [
+      new Response(
+        new Blob([
+          JSON.stringify(
+            {
+              "access_token": "xyz",
+            },
+            null,
+            2,
+          ),
+        ], { type: "application/json" }),
       ),
-      Promise.resolve(
-        new Response(
-          new Blob([
-            JSON.stringify(
-              {
-                "UPLOAD_STATE": "SUCCESS",
-              },
-              null,
-              2,
-            ),
-          ], { type: "application/json" }),
-        ),
+      new Response(
+        new Blob([
+          JSON.stringify(
+            {
+              "UPLOAD_STATE": "SUCCESS",
+            },
+            null,
+            2,
+          ),
+        ], { type: "application/json" }),
       ),
-      Promise.resolve(
-        new Response(
-          new Blob([
-            JSON.stringify(
-              {
-                "access_token": "xyz",
-              },
-              null,
-              2,
-            ),
-          ], { type: "application/json" }),
-        ),
+      new Response(
+        new Blob([
+          JSON.stringify(
+            {
+              "access_token": "xyz",
+            },
+            null,
+            2,
+          ),
+        ], { type: "application/json" }),
       ),
-      Promise.resolve(
-        new Response(
-          new Blob([
-            JSON.stringify(
-              {
-                "status": ["OK"],
-              },
-              null,
-              2,
-            ),
-          ], { type: "application/json" }),
-        ),
+      new Response(
+        new Blob([
+          JSON.stringify(
+            {
+              "status": ["OK"],
+            },
+            null,
+            2,
+          ),
+        ], { type: "application/json" }),
       ),
-    ]);
+    ];
+
+    const responses = async function* () {
+      yield* mockResponses;
+    };
+
+    const fetchStub: Stub<typeof globalThis> = stub(
+      globalThis,
+      "fetch",
+      resolvesNext(responses()),
+    );
+
     const uploadResult = await upload(fixtures.uploadOptions);
 
     assertEquals(
@@ -321,37 +341,45 @@ Deno.test({
         source: "./tests/fixtures/extension.zip",
       },
     } as const;
-    const fetchStub: Stub<typeof globalThis> = stub(globalThis, "fetch", [
-      Promise.resolve(
-        new Response(
-          new Blob([
-            JSON.stringify(
-              {
-                "access_token": "xyz",
-              },
-              null,
-              2,
-            ),
-          ], { type: "application/json" }),
-        ),
+
+    const mockResponses = [
+      new Response(
+        new Blob([
+          JSON.stringify(
+            {
+              "access_token": "xyz",
+            },
+            null,
+            2,
+          ),
+        ], { type: "application/json" }),
       ),
-      Promise.resolve(
-        new Response(
-          new Blob([
-            JSON.stringify(
-              {
-                kind: "chromewebstore#item",
-                "item_id": fixtures.uploadOptions.extensionId,
-                "status": ["OK"],
-                "statusDetail": "Publish successful",
-              },
-              null,
-              2,
-            ),
-          ], { type: "application/json" }),
-        ),
+      new Response(
+        new Blob([
+          JSON.stringify(
+            {
+              kind: "chromewebstore#item",
+              "item_id": fixtures.uploadOptions.extensionId,
+              "status": ["OK"],
+              "statusDetail": "Publish successful",
+            },
+            null,
+            2,
+          ),
+        ], { type: "application/json" }),
       ),
-    ]);
+    ];
+
+    const responses = async function* () {
+      yield* mockResponses;
+    };
+
+    const fetchStub: Stub<typeof globalThis> = stub(
+      globalThis,
+      "fetch",
+      resolvesNext(responses()),
+    );
+
     const publishResult = await publish(fixtures.uploadOptions);
 
     assertEquals(
@@ -408,37 +436,45 @@ Deno.test({
         trustedTesters: true,
       },
     } as const;
-    const fetchStub: Stub<typeof globalThis> = stub(globalThis, "fetch", [
-      Promise.resolve(
-        new Response(
-          new Blob([
-            JSON.stringify(
-              {
-                "access_token": "xyz",
-              },
-              null,
-              2,
-            ),
-          ], { type: "application/json" }),
-        ),
+
+    const mockResponses = [
+      new Response(
+        new Blob([
+          JSON.stringify(
+            {
+              "access_token": "xyz",
+            },
+            null,
+            2,
+          ),
+        ], { type: "application/json" }),
       ),
-      Promise.resolve(
-        new Response(
-          new Blob([
-            JSON.stringify(
-              {
-                kind: "chromewebstore#item",
-                "item_id": fixtures.uploadOptions.extensionId,
-                "status": ["OK"],
-                "statusDetail": "Publish successful",
-              },
-              null,
-              2,
-            ),
-          ], { type: "application/json" }),
-        ),
+      new Response(
+        new Blob([
+          JSON.stringify(
+            {
+              kind: "chromewebstore#item",
+              "item_id": fixtures.uploadOptions.extensionId,
+              "status": ["OK"],
+              "statusDetail": "Publish successful",
+            },
+            null,
+            2,
+          ),
+        ], { type: "application/json" }),
       ),
-    ]);
+    ];
+
+    const responses = async function* () {
+      yield* mockResponses;
+    };
+
+    const fetchStub: Stub<typeof globalThis> = stub(
+      globalThis,
+      "fetch",
+      resolvesNext(responses()),
+    );
+
     const publishResult = await publish(fixtures.uploadOptions);
 
     assertEquals(
