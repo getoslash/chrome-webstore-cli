@@ -5,6 +5,6 @@ export {
 } from "https://deno.land/std@0.115.1/testing/asserts.ts";
 export { createHash } from "https://deno.land/std@0.115.1/hash/mod.ts";
 export { iterateReader } from "https://deno.land/std@0.115.1/streams/conversion.ts";
-export { stub } from "https://deno.land/x/mock@0.12.0/mod.ts";
+export { resolvesNext, stub } from "https://deno.land/x/mock@0.12.0/mod.ts";
 export type { Stub } from "https://deno.land/x/mock@0.12.0/mod.ts";
 export type { SupportedAlgorithm } from "https://deno.land/std@0.115.1/hash/mod.ts";
