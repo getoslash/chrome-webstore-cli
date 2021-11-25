@@ -50,14 +50,10 @@ Deno.test({
       ),
     ];
 
-    const responses = async function* () {
-      yield* mockResponses;
-    };
-
     const fetchStub: Stub<typeof globalThis> = stub(
       globalThis,
       "fetch",
-      resolvesNext(responses()),
+      resolvesNext(mockResponses),
     );
 
     const uploadResult = await upload(fixtures.uploadOptions);
@@ -137,14 +133,10 @@ Deno.test({
       ),
     ];
 
-    const responses = async function* () {
-      yield* mockResponses;
-    };
-
     const fetchStub: Stub<typeof globalThis> = stub(
       globalThis,
       "fetch",
-      resolvesNext(responses()),
+      resolvesNext(mockResponses),
     );
 
     const uploadResult = await upload(fixtures.uploadOptions);
@@ -246,14 +238,10 @@ Deno.test({
       ),
     ];
 
-    const responses = async function* () {
-      yield* mockResponses;
-    };
-
     const fetchStub: Stub<typeof globalThis> = stub(
       globalThis,
       "fetch",
-      resolvesNext(responses()),
+      resolvesNext(mockResponses),
     );
 
     const uploadResult = await upload(fixtures.uploadOptions);
@@ -370,14 +358,10 @@ Deno.test({
       ),
     ];
 
-    const responses = async function* () {
-      yield* mockResponses;
-    };
-
     const fetchStub: Stub<typeof globalThis> = stub(
       globalThis,
       "fetch",
-      resolvesNext(responses()),
+      resolvesNext(mockResponses),
     );
 
     const publishResult = await publish(fixtures.uploadOptions);
@@ -465,14 +449,10 @@ Deno.test({
       ),
     ];
 
-    const responses = async function* () {
-      yield* mockResponses;
-    };
-
     const fetchStub: Stub<typeof globalThis> = stub(
       globalThis,
       "fetch",
-      resolvesNext(responses()),
+      resolvesNext(mockResponses),
     );
 
     const publishResult = await publish(fixtures.uploadOptions);
