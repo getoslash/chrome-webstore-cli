@@ -1,7 +1,7 @@
 <!--
 Before submitting a PR, please read https://github.com/getoslash/chrome-webstore-cli
 
-1. Give the PR a descriptive title.
+1. Give the PR a descriptive title. See https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular#readme for examples.
 
   Examples of good title:
     - fix(cli): Fix error in cli
