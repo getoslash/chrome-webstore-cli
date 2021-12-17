@@ -98,7 +98,7 @@ jobs:
     - name: Generate coverage data
       run: vr coverage
     - name: Upload coverage report to Codecov
-      uses: codecov/codecov-action@v1
+      uses: codecov/codecov-action@v2
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         files: cov_profile.lcov
