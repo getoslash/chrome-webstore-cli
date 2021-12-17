@@ -74,10 +74,11 @@ Fork with [GitHub Codespaces](https://github.com/features/codespaces):
 
 Make your changes to the file(s) you'd like to update.
 
-- Are you making changes to the application code? You'll need **Deno v1.12+** to
+- Are you making changes to the application code? You'll need **Deno v1.17+** to
   run the tests locally.
 - Are you contributing to markdown? We use
   [GitHub Markdown](contributing/content-markup-reference.md).
+- Writing a Git commit message? We use the [Angular commit convention](https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular#readme).
 
 ### Open a pull request
 
