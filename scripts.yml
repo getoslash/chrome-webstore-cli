@@ -73,7 +73,7 @@ scripts:
     lock: lock.json
   update:
     - desc: Update all dependencies
-      cmd: deno run https://deno.land/x/udd@0.5.0/main.ts dev_deps.ts deps.ts
+      cmd: deno run https://deno.land/x/udd@0.6.0/main.ts dev_deps.ts deps.ts
       allow:
           - read
           - write
